@@ -10,7 +10,8 @@ module Doorkeeper
             applications: 'doorkeeper/applications',
             authorized_applications: 'doorkeeper/authorized_applications',
             tokens: 'doorkeeper/tokens',
-            token_info: 'doorkeeper/token_info'
+            token_info: 'doorkeeper/token_info',
+            cda: 'doorkeeper/cda'
           }
 
           @as = {

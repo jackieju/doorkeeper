@@ -19,10 +19,13 @@ module Doorkeeper
 
       def initialize(routes, &block)
         @routes, @block = routes, block
+        # p "@block=#{@block.inspect}", 30
       end
 
       def generate_routes!(options)
+           # p "block3:#{@block.inspect}"
         @mapping = Mapper.new.map(&@block)
+        p "mapping3:#{@mapping.inspect}"
         routes.scope options[:scope] || 'oauth', as: 'oauth' do
           map_route(:authorizations, :authorization_routes)
           map_route(:tokens, :token_routes)
@@ -30,6 +33,8 @@ module Doorkeeper
           map_route(:applications, :application_routes)
           map_route(:authorized_applications, :authorized_applications_routes)
           map_route(:token_info, :token_info_routes)
+          map_route(:cda, :cda_routes)
+          
         end
         
       end
@@ -65,9 +70,16 @@ module Doorkeeper
       end
 
       def revoke_routes(mapping)
+          # p "mapping2:#{mapping.inspect}"
+          
         routes.post 'revoke', controller: mapping[:controllers], action: :revoke
       end
-
+      def cda_routes(mapping)
+          p "mapping:#{mapping.inspect}"
+        routes.post 'cda', controller: mapping[:controllers], action: :index
+        routes.get 'cda', controller: mapping[:controllers], action: :index
+        
+      end
       def token_info_routes(mapping)
         routes.resource(
           :token_info,

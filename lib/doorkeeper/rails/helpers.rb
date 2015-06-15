@@ -5,7 +5,11 @@ module Doorkeeper
       extend ActiveSupport::Concern
 
       def central_doorkeeper_authorize!(*scopes)
-            https_post("https://localhost:3001/cda", nil)
+          # TODO should use https
+          p "send request to http://localhost:3000/cda.."
+          resp,data = https_post("http://localhost:3000/oauth/cda", params)
+          p "==>resp:#{resp}, #{resp.code}; data=#{data}"
+          
       end
       
       def doorkeeper_authorize!(*scopes)

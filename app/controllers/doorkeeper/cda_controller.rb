@@ -1,8 +1,12 @@
 module Doorkeeper
-  class AuthorizedApplicationsController < Doorkeeper::ApplicationController
-
+  class CdaController < Doorkeeper::ApplicationController
+    before_action :doorkeeper_authorize!
     def index
-        p "cda!!!"
+        p "cda!!!, params=#{params.inspect}"
+        ret = {
+            
+        }
+        render :json=>ret
     end
 
 

@@ -3,11 +3,20 @@ module Doorkeeper
     class Routes
       class Mapper
         def initialize(mapping = Mapping.new)
+            # p "==>>4#{@mapping.inspect}", 30
+            
+            # p "==>>3#{mapping.inspect}"
+            
           @mapping = mapping
+          
         end
 
         def map(&block)
+            # p "==>>1#{@mapping.inspect}"
+            
+            # p "instance_eval:#{block.inspect}"
           self.instance_eval(&block) if block
+          # p "==>>2#{@mapping.inspect}"
           @mapping
         end
 
