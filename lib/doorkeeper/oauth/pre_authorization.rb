@@ -47,6 +47,7 @@ module Doorkeeper
       end
 
       def validate_scopes
+p "1request scope=#{scope}, server.scopes=#{server.scopes}, app scopes=#{client.application.scopes}"
         return true unless scope.present?
         Helpers::ScopeChecker.valid?(
           scope,

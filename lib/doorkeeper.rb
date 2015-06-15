@@ -1,3 +1,4 @@
+# require 'http_post.r'
 require 'doorkeeper/version'
 require 'doorkeeper/engine'
 require 'doorkeeper/config'
@@ -47,6 +48,8 @@ require 'doorkeeper/rails/routes'
 require 'doorkeeper/rails/helpers'
 
 require 'doorkeeper/orm/active_record'
+
+# require 'doorkeeper/http_post.rb'
 
 module Doorkeeper
   def self.configured?

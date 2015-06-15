@@ -31,6 +31,7 @@ module Doorkeeper
           map_route(:authorized_applications, :authorized_applications_routes)
           map_route(:token_info, :token_info_routes)
         end
+        
       end
 
       private

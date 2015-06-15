@@ -1,13 +1,25 @@
+require 'http_post.rb'
 module Doorkeeper
   module Rails
     module Helpers
       extend ActiveSupport::Concern
 
+      def central_doorkeeper_authorize!(*scopes)
+            https_post("https://localhost:3001/cda", nil)
+      end
+      
       def doorkeeper_authorize!(*scopes)
+          p "==>self:#{self}"
+          p "===>scope:#{scopes}"
         @_doorkeeper_scopes = scopes.presence || Doorkeeper.configuration.default_scopes
+        p "===>doorkeeper_authorize!2"
 
         if !valid_doorkeeper_token?
+            p "===>doorkeeper_authorize!3"
+            
           doorkeeper_render_error
+          p "===>doorkeeper_authorize!4"
+          
         end
       end
 
@@ -18,6 +30,7 @@ module Doorkeeper
       end
 
       def valid_doorkeeper_token?
+          p "doorkeeper_token=#{doorkeeper_token}"
         doorkeeper_token && doorkeeper_token.acceptable?(@_doorkeeper_scopes)
       end
 
@@ -25,6 +38,7 @@ module Doorkeeper
 
       def doorkeeper_render_error
         error = doorkeeper_error
+        p "===>error:#{error}"
         headers.merge! error.headers.reject { |k| "Content-Type" == k }
         doorkeeper_render_error_with(error)
       end

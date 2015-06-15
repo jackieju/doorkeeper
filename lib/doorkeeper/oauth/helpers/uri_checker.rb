@@ -16,6 +16,7 @@ module Doorkeeper
         end
 
         def self.valid_for_authorization?(url, client_url)
+return true
           valid?(url) && client_url.split.any? { |other_url| matches?(url, other_url) }
         end
 
